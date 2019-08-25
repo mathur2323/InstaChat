@@ -7,9 +7,12 @@ import {
 
 export default function* getProfileInfoWalkerSaga(action){
     const result = yield put({type:GET_USER_PROFILE_INFO_ASYNC, action})
-
-    yield put({type:GET_USER_PROFILE_INFO_SUCCESS, action})
-    yield put({type:GET_USER_PROFILE_INFO_FAILURE})
+    if(result.length>0){
+        yield put({type:GET_USER_PROFILE_INFO_SUCCESS, action})
+    }
+    else{
+        yield put({type:GET_USER_PROFILE_INFO_FAILURE})
+    }
 }
 
 export default function* getProfileInfoWatcherSaga(){
