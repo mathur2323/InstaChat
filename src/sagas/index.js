@@ -1,8 +1,12 @@
-import getProfileInfoWatcherSaga from './saga.profileInfo'
-import getProfileDataWatcherSaga from './saga.profileData'
-import {all} from 'redux-saga';
+import { postsWatcherSaga } from './saga.posts'
+import { friendsWatcherSaga } from './saga.friends'
+import { profilePictureWatcherSaga} from './saga.profilePicture'
+import {all} from 'redux-saga/effects'
 
-const rootSaga = yield all([getProfileInfoWatcherSaga(),
-    getProfileDataWatcherSaga()])
-
-export default rootSaga
+export default function* rootSaga(){
+    yield all([
+        postsWatcherSaga(),
+        friendsWatcherSaga(),
+        profilePictureWatcherSaga()
+    ])
+}

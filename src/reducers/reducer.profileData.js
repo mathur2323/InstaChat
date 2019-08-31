@@ -1,7 +1,0 @@
-const profileData = (state,action)=>{
-    switch(action.type){
-        default:
-            return state
-    }
-}
-export default profileData
