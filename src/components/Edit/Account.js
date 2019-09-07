@@ -1,24 +1,55 @@
 import React, { Component } from 'react'
-import {ProfileInfo} from './Container'
+import { ProfileInfo } from './Container'
+import { Form, Button, ButtonGroup } from 'react-bootstrap';
+import FormField from './FormField';
 
 class Account extends Component {
     render() {
+        const formFields = [{
+            label:'Name',
+            type:'text',
+        },
+        {
+            label:'Username',
+            type:'text'
+        },
+        {
+            label:'Website',
+            type:'url'
+        },
+        {
+            label:'Bio',
+            type:'textarea'
+        },
+        {
+            label:'Email Address',
+            type:'email'
+        },
+        {
+            label:'Number',
+            type:'number'
+        }
+    ]
         return (
             <>
+
                 <ProfileInfo />
-                <form>
-                    <input type='text' placeholder='Name' />
-                    <input type='text' placeholder='Username' />
-                    <input type='text' placeholder='Website' />
-                    <textarea placeholder="Bio"></textarea>
-                    <input type='email' placeholder='Email' />
-                    <input type='number' placeholder='Mobile Number' />
-                    <input type='radio' name='gender' />
-                    <label>Male</label>
-                    <input type='radio' name='gender' />
-                    <label>Female</label>
-                    <button>Submit</button>
-                </form>
+                <Form>
+                    {
+                        formFields.map(formField => <FormField
+                            label={formField.label}
+                            type={formField.type} />)
+                    }
+                    <ButtonGroup aria-label="Basic example">
+                        <Button variant="secondary">Male</Button>
+                        <Button variant="secondary">Female</Button>
+
+                    </ButtonGroup>
+                    <Form.Group controlId="formBasicCheckbox">
+                        <Form.Check type="checkbox" label="Check me out" />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">Update</Button>
+                </Form>
             </>
         )
     }

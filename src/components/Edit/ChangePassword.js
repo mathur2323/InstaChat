@@ -1,17 +1,30 @@
 import React, { Component } from 'react'
 import {ProfileInfo} from './Container';
+import {Form, Button} from 'react-bootstrap';
+import FormField from './FormField';
 
 class ChangePassword extends Component {
     render() {
+        const formFields = [{
+            label:'Old Password',
+        },
+        {
+            label:'New Password'
+        },
+        {
+            label:'Confirm New Password'
+        }
+    ]
         return (
             <div>
                 <ProfileInfo />
-                <form>
-                    <input type='password' placeholder="Old Password" />
-                    <input type='password' placeholder='New Password' />
-                    <input type='password' placeholder='Confirm New Password' />
-                    <button>Submit</button>
-                </form>
+                <Form>
+                {
+                    formFields.map(formField => <FormField label={formField.label} type='password' />)
+                }
+  
+  <Button variant="primary" type="submit">Change Password</Button>
+</Form>
             </div>
         )
     }
