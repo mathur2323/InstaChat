@@ -1,53 +1,28 @@
 import React, { Component } from 'react'
-import {NavLink} from 'react-router-dom';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
-import Nav from 'react-bootstrap/Nav';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faPaperPlane, faUser } from '@fortawesome/free-solid-svg-icons'
-import logo from './../assets/insta-logo.png';
+import { connect } from 'react-redux'
+import { logoutRequest } from './../actions';
+import NavContainer from './wrappers/NavContainer';
 
 class NavMenu extends Component {
-    render() {      
+    render() {
         return (
-            <Navbar bg="light" expand="lg">
-                <Navbar.Brand>
-                    <NavLink to="/">InstaChat</NavLink>
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Form inline  style={styles.searchBar}>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
-                    <Nav className="ml-auto">
-                        <NavLink to="/chat"><FontAwesomeIcon icon={faPaperPlane} style={styles.iconStyle} /></NavLink>
-                        <NavLink to=""><FontAwesomeIcon icon={faHeart} style={styles.iconStyle} /></NavLink>
-                        
-                            <NavLink to="/profile">
-                                <FontAwesomeIcon icon={faUser} style={styles.iconStyle} />
-                            </NavLink>
-                    
-                    </Nav>
-                   
-                </Navbar.Collapse>
-            </Navbar>
+            <>
+                {
+                    !!this.props.userToken.accessToken ? <NavContainer logout={this.props.logoutRequest} /> : window.location.href.indexOf('unauthaccess') >= 0 ? null : <h1>InstaChat</h1>
+                }
+            </>
         )
     }
 }
 
-const styles = {
-    searchBar:{
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)'
-    },
-    iconStyle:{
-        fontSize:24
-    }
-}
 
-export default NavMenu
+
+const mapStateToProps = state => ({
+    userToken: state.userToken
+})
+
+const mapDispatchToProps = dispatch => ({
+    logoutRequest: () => dispatch(logoutRequest())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavMenu)

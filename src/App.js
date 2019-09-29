@@ -5,7 +5,6 @@ import Nav from './components/Nav';
 
 class App extends React.Component {
   render(){
-    console.log(this.props);
     return (
       <BrowserRouter>
       <div>

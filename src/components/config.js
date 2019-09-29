@@ -5,7 +5,7 @@ const firebaseConfig = {
     authDomain: "wowalaproject.firebaseapp.com",
     databaseURL: "https://wowalaproject.firebaseio.com",
     projectId: "wowalaproject",
-    storageBucket: "",
+    storageBucket: "wowalaproject.appspot.com",
     messagingSenderId: "216922399575",
     appId: "1:216922399575:web:a4a10cd4cbdbe8cb"
   };

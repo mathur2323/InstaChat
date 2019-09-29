@@ -2,15 +2,20 @@ import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
-import fire from './config';
 import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {loginRequest, loginRequestSuccess} from './../actions';
+import fire from './config';
+import ClipLoader from 'react-spinners/ClipLoader';
+
 class Login extends Component {
     constructor() {
         super()
     
         this.state = {
              email:'',
-             password:''
+             password:'',
+             loading:false
         }
     }
 
@@ -18,12 +23,22 @@ class Login extends Component {
     
     loginUser = (e)=>{
         e.preventDefault();
+        this.setState({
+            loading:true
+        })
         fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(()=>{
-            alert('Logged In')
+        .then((user)=>{
+            console.log(user)
+            this.props.loginRequestSuccess(user.user.uid);
+            sessionStorage.setItem('access_token',user.user.uid)
+            this.setState({
+                loading:false
+            })
         })
         .catch((err)=>{
-            alert(err.message);
+            this.setState({
+                loading:false
+            })
         })
     }
     render() {
@@ -43,9 +58,25 @@ class Login extends Component {
                         <NavLink to="/register">Create An Account?</NavLink>
                     </Col>
                 </Row>
+                
+                <ClipLoader
+                    sizeUnit={"px"}
+                    size={150}
+                    color={'#123abc'}
+                    loading={this.state.loading}
+                    />
+                
             </Container>
         )
     }
 }
 
-export default Login
+const mapStateToProps = state =>({
+    userToken:state.userInfo
+})
+const mapDispatchToProps = dispatch => ({
+    loginRequest:(userCreds)=>dispatch(loginRequest(userCreds)),
+    loginRequestSuccess:(accessToken)=>dispatch(loginRequestSuccess(accessToken))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
