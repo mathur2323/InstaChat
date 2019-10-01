@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 import ListGroup from 'react-bootstrap/ListGroup'
 import ChatWrapper from './ChatWrapper';
+import {Redirect} from 'react-router-dom'
 
 class Chat extends Component {
     constructor(props) {
@@ -31,6 +32,9 @@ class Chat extends Component {
         // const Friends=[1,2,3,4,5,6,7,8,9,10]
         const ActiveTime =[21,23,46,1,34,6,34,9,56,3]
         return (
+            <>
+            {
+                !!sessionStorage.getItem('access_token') ? 
                 <Container>
                 <Row>
                     <Col md={4}>
@@ -48,7 +52,9 @@ class Chat extends Component {
                         <ChatWrapper name={this.state.Friend} time={this.state.time} />
                     </Col>
                 </Row>
-            </Container>
+            </Container> : <Redirect to="/" from="/chat" />
+            }
+            </>
         )
     }
 }

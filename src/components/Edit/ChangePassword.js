@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {ProfileInfo} from './Container';
 import {Form, Button} from 'react-bootstrap';
 import FormField from './FormField';
-
+import {Redirect} from 'react-router-dom';
 class ChangePassword extends Component {
     render() {
         const formFields = [{
@@ -16,6 +16,9 @@ class ChangePassword extends Component {
         }
     ]
         return (
+            <>
+            {
+                            !!sessionStorage.getItem('access_token') ?
             <div>
                 <ProfileInfo />
                 <Form>
@@ -25,7 +28,10 @@ class ChangePassword extends Component {
   
   <Button variant="primary" type="submit">Change Password</Button>
 </Form>
-            </div>
+            </div> : <Redirect to="/" from="/changepassword" />
+            
+        }
+         </>
         )
     }
 }

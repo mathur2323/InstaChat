@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Container, Row, Col} from 'react-bootstrap';
-
+import {Redirect} from 'react-router-dom';
 class Notifications extends Component {
     constructor() {
         super()
@@ -29,6 +29,9 @@ class Notifications extends Component {
             summary = 'tagged you in a post'
         }
         return (
+            <>
+            {
+                !!sessionStorage.getItem('access_token') ?
             <Container>
                 <h1>Notifications</h1>
                 <Row>
@@ -47,7 +50,8 @@ class Notifications extends Component {
                         <p>No Pending Notifications</p>
                     }
                 </Row>
-            </Container>
+            </Container> :  <Redirect to="/" from="/notifications" />
+            } </>
         )
     }
 }
