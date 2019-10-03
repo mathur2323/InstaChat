@@ -4,10 +4,10 @@ import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 import { NavLink } from 'react-router-dom'
 import fire from './../config';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class PersonalDetails extends Component {
-    
+
     handlePicture = (e) => {
         const uid = this.props.userToken.accessToken;
         // let date = e.target.files[0].lastModified
@@ -16,7 +16,7 @@ class PersonalDetails extends Component {
         let metadata = {
             contentType: 'image/jpeg'
         };
-        let mountainImagesRef = storageRef.child('profile_pictures/'+ uid + '/' + filename)
+        let mountainImagesRef = storageRef.child('profile_pictures/' + uid + '/' + filename)
         let onUploadTask = mountainImagesRef.put(e.target.files[0], metadata);
 
         onUploadTask.on('state_changed', function (snapshot) {
@@ -27,6 +27,9 @@ class PersonalDetails extends Component {
 
     render() {
         return (
+
+
+
             <Row>
                 <Col md={3}>
                     <Image src="https://via.placeholder.com/150" />
@@ -37,9 +40,12 @@ class PersonalDetails extends Component {
                         <Col>
                             <h2>Username</h2>
                         </Col>
+
+
                         <Col>
                             <button><NavLink to='/edit'>Edit Profile</NavLink></button>
                         </Col>
+
                     </Row>
                     <Row>
                         <Col>
@@ -59,12 +65,14 @@ class PersonalDetails extends Component {
                     </Row>
                 </Col>
             </Row>
+
+
         )
     }
 }
 
 const mapStateToProps = state => ({
-    userToken:state.userToken
+    userToken: state.userToken
 })
 
 const mapDispatchToProps = dispatch => ({

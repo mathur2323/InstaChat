@@ -14,6 +14,7 @@ class NavContainer extends Component {
 
             <Navbar bg="light" expand="lg">
                 <Navbar.Brand>
+                    <NavLink to="/"><img src="https://i0.wp.com/www.somictech.com/wp-content/uploads/2018/02/INSTA-MESSENGER-REVIEW.png?resize=300%2C300&ssl=1" style={styles.image}></img></NavLink>
                     <NavLink to="/">InstaChat</NavLink>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -46,6 +47,11 @@ const styles = {
     },
     iconStyle: {
         fontSize: 24
+    },
+    image: {
+        height: '30px',
+        width: '30px',
+        margin : '0px 5px'
     }
 }
 export default NavContainer

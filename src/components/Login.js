@@ -8,8 +8,8 @@ import { loginRequest, loginRequestSuccess } from './../actions';
 import fire from './config';
 import DotLoader from 'react-spinners/DotLoader';
 class Login extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props);
 
         this.state = {
             email: '',
@@ -42,7 +42,8 @@ class Login extends Component {
     }
     render() {
         return (
-            <Container>
+            
+            <Container>    
                 <Row>
                     <Col md={{ span: 6, offset: 3 }}>
                         <form onSubmit={this.loginUser}>
@@ -73,13 +74,22 @@ class Login extends Component {
     }
 }
 
+
+
 const styles = {
     loader : {
         position : 'absolute',
         top : '40%',
         left : '40%',
         // transform : 'translate(-50%,-50%)'
+    },
+    
+    image: {
+        height: '30px',
+        width: '30px',
+        margin : '0px 5px'
     }
+
 }
 const mapStateToProps = state => ({
     userToken: state.userInfo

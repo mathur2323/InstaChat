@@ -9,14 +9,17 @@ import {Account, Contacts, ChangePassword, Privacy, Donate}from './Container';
 class EditProfile extends Component {
     render() {
         return (
+            <>
+            {
+                !!sessionStorage.getItem('access_token') ?
             <Container>
                 <Row>
                     <Col md={3}>
                         <ListGroup>
-                            <ListGroup.Item><NavLink to="/edit/account">Edit Profile</NavLink></ListGroup.Item>
-                            <ListGroup.Item><NavLink to="/edit/change_password">Change Password</NavLink></ListGroup.Item>
-                            <ListGroup.Item><NavLink to="/edit/contacts">Contacts</NavLink></ListGroup.Item>
-                            <ListGroup.Item><NavLink to="/edit/privacy">Privacy & Security</NavLink></ListGroup.Item>
+                            <ListGroup.Item><NavLink  to="/edit/account">Edit Profile</NavLink></ListGroup.Item>
+                            <ListGroup.Item><NavLink  to="/edit/change_password">Change Password</NavLink></ListGroup.Item>
+                            <ListGroup.Item><NavLink  to="/edit/contacts">Contacts</NavLink></ListGroup.Item>
+                            <ListGroup.Item><NavLink  to="/edit/privacy">Privacy & Security</NavLink></ListGroup.Item>
                         </ListGroup>
                     </Col>
                     <Col>
@@ -27,8 +30,11 @@ class EditProfile extends Component {
                             <Route path="/edit/privacy" component={Privacy} />
                         </Switch>
                     </Col>
-                </Row>
-            </Container>
+                </Row>  
+            </Container> : <Redirect to = "/" from = "/index"/>
+            }
+            </>
+        
         )
     }
 }
