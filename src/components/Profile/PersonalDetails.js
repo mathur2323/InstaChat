@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, * as react from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 import fire from './../config';
 import { connect } from 'react-redux';
 
-class PersonalDetails extends Component {
+class PersonalDetails extends react.Component {
 
     handlePicture = (e) => {
         const uid = this.props.userToken.accessToken;
@@ -23,16 +23,25 @@ class PersonalDetails extends Component {
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             console.log('Upload is ' + progress + '% done');
         })
+
+        // mountainImagesRef.getDownloadURL().then(function (url) {
+        //     var test = url;
+        //     console.log(test)
+        //     let img = document.getElementById('#userimage')
+        //     img.src = test;
+        // }).catch(function (error) {
+
+        // });
+        // var test = 'gs://firstproject-37738.appspot.com/profile_pictures/' + uid + '/' + filename;
+
+
     }
 
     render() {
         return (
-
-
-
             <Row>
                 <Col md={3}>
-                    <Image src="https://via.placeholder.com/150" />
+                    <Image id='userimage' src="https://via.placeholder.com/150" />
                     <input type='file' onChange={this.handlePicture} />
                 </Col>
                 <Col>
@@ -78,5 +87,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 
 })
-
 export default connect(mapStateToProps, mapDispatchToProps)(PersonalDetails)

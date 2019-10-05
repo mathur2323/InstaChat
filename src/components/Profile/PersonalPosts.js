@@ -15,4 +15,5 @@ class PersonalPosts extends Component {
     }
 }
 
+
 export default PersonalPosts

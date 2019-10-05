@@ -22,8 +22,7 @@ const styles = {
         height: '30px',
         width: '30px',
         margin : '0px 5px'
-    }
-
+    },
 }
 
 

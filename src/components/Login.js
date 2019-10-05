@@ -43,17 +43,17 @@ class Login extends Component {
     render() {
         return (
             
-            <Container>    
+            <Container style = {styles.container}>    
                 <Row>
                     <Col md={{ span: 6, offset: 3 }}>
                         <form onSubmit={this.loginUser}>
-                            <input type="email" placeholder="Email"
+                            <input style = {styles.inpt} type="email" placeholder="Email"
                                 onChange={this.formVal} name="email"
                                 value={this.state.email} />
-                            <input type="password" placeholder="Password"
+                            <input style = {styles.inpt} type="password" placeholder="Password"
                                 onChange={this.formVal} name="password"
-                                value={this.state.password} />
-                            <button>Sign In</button>
+                                value={this.state.password} /><br/>
+                            <button style = {styles.btn}>Sign In</button>
                         </form>
                         <NavLink to="/register">Create An Account?</NavLink>
                     </Col>
@@ -79,17 +79,36 @@ class Login extends Component {
 const styles = {
     loader : {
         position : 'absolute',
-        top : '40%',
-        left : '40%',
-        // transform : 'translate(-50%,-50%)'
+        top : '35%',
+        left : '45%',
     },
     
     image: {
         height: '30px',
         width: '30px',
         margin : '0px 5px'
-    }
-
+    },
+    btn: {
+        borderRadius: '5px',
+        height: '35px',
+        border: 'none',
+        width: '150px',
+        margin: '10px',
+        background: '#1C00E9',
+        color: 'white',
+        fontWeight: 'bold'
+},
+container : {
+    textAlign : "center",
+},
+inpt: {
+    borderRadius: '10px',
+    border: 'solid 1px grey',
+    height: '40px',
+    width: '300px',
+    padding: '10px',
+    margin: '10px'
+},
 }
 const mapStateToProps = state => ({
     userToken: state.userInfo
