@@ -16,10 +16,15 @@ class EditProfile extends Component {
                 <Row>
                     <Col md={3}>
                         <ListGroup>
-                            <ListGroup.Item><NavLink  to="/edit/account">Edit Profile</NavLink></ListGroup.Item>
-                            <ListGroup.Item><NavLink  to="/edit/change_password">Change Password</NavLink></ListGroup.Item>
-                            <ListGroup.Item><NavLink  to="/edit/contacts">Contacts</NavLink></ListGroup.Item>
-                            <ListGroup.Item><NavLink  to="/edit/privacy">Privacy & Security</NavLink></ListGroup.Item>
+                            <ListGroup.Item style={{padding:0}}>
+                                <NavLink style={{display:'block',padding:'10px 15px', borderRadius:'4px'}}
+                                    activeStyle={{color:'#fff', backgroundColor:'#123abc'}} to="/edit/account">
+                                    Edit Profile
+                                    </NavLink>
+                                </ListGroup.Item>
+                            <ListGroup.Item><NavLink activeStyle={{color:'red'}}  to="/edit/change_password">Change Password</NavLink></ListGroup.Item>
+                            <ListGroup.Item><NavLink  activeStyle={{color:'red'}} to="/edit/contacts">Contacts</NavLink></ListGroup.Item>
+                            <ListGroup.Item><NavLink  activeStyle={{color:'red'}} to="/edit/privacy">Privacy & Security</NavLink></ListGroup.Item>
                         </ListGroup>
                     </Col>
                     <Col>

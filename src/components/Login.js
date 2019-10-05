@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginRequest, loginRequestSuccess } from './../actions';
 import fire from './config';
@@ -41,6 +41,9 @@ class Login extends Component {
             })
     }
     render() {
+        if(!!sessionStorage.getItem("access_token")){
+            return <Redirect to="/home" />
+        }
         return (
             
             <Container style = {styles.container}>    

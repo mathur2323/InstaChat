@@ -90,7 +90,10 @@ const styles = {
         margin: '20px',
         background: 'white',
         textAlign: 'center',
-    }
+    },
+    // outerdiv:{
+    //     background:'red'
+    // }
 }
 
 export default Register

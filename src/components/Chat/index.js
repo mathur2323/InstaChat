@@ -41,7 +41,7 @@ class Chat extends Component {
                         <ListGroup>
                             <ListGroup.Item active>Active Friends</ListGroup.Item>
                             {ActiveTime.map((time,key)=>
-                            <ListGroup.Item key={key} >
+                            <ListGroup.Item key={key}>
                                 <Image src={'https://via.placeholder.com/40'} roundedCircle className="mr-3" />
                                 <p style={styles.listLeft} name="Friend" onClick={this.updateVal}>Friend {key+1}</p>
                                 <p style={styles.listRight} name="time" onClick={this.updateVal}>{time} min ago</p>

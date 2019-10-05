@@ -7,11 +7,19 @@ import fire from './../config';
 import { connect } from 'react-redux';
 
 class PersonalDetails extends react.Component {
+    constructor() {
+        super()
+
+        this.state = {
+            profilePictureUrl: ''
+        }
+    }
+
 
     handlePicture = (e) => {
-        const uid = this.props.userToken.accessToken;
+        const uid = sessionStorage.getItem("access_token");
         // let date = e.target.files[0].lastModified
-        let filename = e.target.files[0].name
+        let filename = 'myprofilepicture'
         let storageRef = fire.storage().ref();
         let metadata = {
             contentType: 'image/jpeg'
@@ -24,24 +32,35 @@ class PersonalDetails extends react.Component {
             console.log('Upload is ' + progress + '% done');
         })
 
-        // mountainImagesRef.getDownloadURL().then(function (url) {
-        //     var test = url;
-        //     console.log(test)
-        //     let img = document.getElementById('#userimage')
-        //     img.src = test;
-        // }).catch(function (error) {
+    }
 
-        // });
-        // var test = 'gs://firstproject-37738.appspot.com/profile_pictures/' + uid + '/' + filename;
 
+    componentDidMount() {
+        let storageRef = fire.storage().ref();
+        const uid = sessionStorage.getItem("access_token");
+
+        storageRef.child('profile_pictures/' + uid + '/myprofilepicture').getDownloadURL()
+            .then((url) => {
+                this.setState({
+                    profilePictureUrl: url
+                })
+            }).catch((error) => {
+                this.setState({
+                    profilePictureUrl: ''
+                })
+            });
 
     }
 
+
+
     render() {
+        console.log(this.state.profilePictureUrl)
         return (
             <Row>
                 <Col md={3}>
-                    <Image id='userimage' src="https://via.placeholder.com/150" />
+                    <Image id='userimage' src={!!this.state.profilePictureUrl ? this.state.profilePictureUrl : 'https://via.placeholder.com/100'}
+                        style={{ width: '200px' }} />
                     <input type='file' onChange={this.handlePicture} />
                 </Col>
                 <Col>
@@ -52,7 +71,7 @@ class PersonalDetails extends react.Component {
 
 
                         <Col>
-                            <button><NavLink to='/edit'>Edit Profile</NavLink></button>
+                            <button><NavLink to='/edit/account'>Edit Profile</NavLink></button>
                         </Col>
 
                     </Row>

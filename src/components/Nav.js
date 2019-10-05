@@ -4,11 +4,24 @@ import { logoutRequest } from './../actions';
 import NavContainer from './wrappers/NavContainer';
 
 class NavMenu extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             accessToken:''
+        }
+    }
+    
+    componentDidMount(){
+        this.setState({
+            accessToken:sessionStorage.getItem('access_token')
+        })
+    }
     render() {
         return (
             <>
                 {
-                    !!this.props.userToken.accessToken ? <NavContainer logout={this.props.logoutRequest} /> : window.location.href.indexOf('unauthaccess') >= 0 ? null : <div style={styles.divs}><h1><img src="https://i0.wp.com/www.somictech.com/wp-content/uploads/2018/02/INSTA-MESSENGER-REVIEW.png?resize=300%2C300&ssl=1" style={styles.image}></img>InstaChat</h1></div>
+                    !!sessionStorage.getItem('access_token') ? <NavContainer logout={this.props.logoutRequest} /> : window.location.href.indexOf('unauthaccess') >= 0 ? null : <div style={styles.divs}><h1><img src="https://i0.wp.com/www.somictech.com/wp-content/uploads/2018/02/INSTA-MESSENGER-REVIEW.png?resize=300%2C300&ssl=1" style={styles.image}></img>InstaChat</h1></div>
                 }
             </>
         )
