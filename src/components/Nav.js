@@ -21,16 +21,16 @@ class NavMenu extends Component {
         return (
             <>
                 {
-                    !!sessionStorage.getItem('access_token') ? <NavContainer logout={this.props.logoutRequest} /> : window.location.href.indexOf('unauthaccess') >= 0 ? null : <div style={styles.divs}><h1><img src="https://i0.wp.com/www.somictech.com/wp-content/uploads/2018/02/INSTA-MESSENGER-REVIEW.png?resize=300%2C300&ssl=1" style={styles.image}></img>InstaChat</h1></div>
+                    !!sessionStorage.getItem('access_token') ? <NavContainer logout={this.props.logoutRequest} /> : window.location.href.indexOf('unauthaccess') >= 0 ? null : <h1 style = {{textDecoration : 'none'}}><img src="https://i0.wp.com/www.somictech.com/wp-content/uploads/2018/02/INSTA-MESSENGER-REVIEW.png?resize=300%2C300&ssl=1" style={styles.image}></img>InstaChat</h1>
                 }
             </>
         )
     }
 }
 const styles = {
-    divs :{
-        display : 'inline-block',
-    },
+    // divs :{
+    //     display : 'inline-block',
+    // },
     image: {
         height: '30px',
         width: '30px',

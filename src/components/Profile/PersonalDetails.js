@@ -59,7 +59,7 @@ class PersonalDetails extends react.Component {
         return (
             <Row>
                 <Col md={3}>
-                    <Image id='userimage' src={!!this.state.profilePictureUrl ? this.state.profilePictureUrl : 'https://via.placeholder.com/100'}
+                    <Image src={!!this.state.profilePictureUrl ? this.state.profilePictureUrl : 'https://via.placeholder.com/100'}
                         style={{ width: '200px' }} />
                     <input type='file' onChange={this.handlePicture} />
                 </Col>
@@ -71,7 +71,7 @@ class PersonalDetails extends react.Component {
 
 
                         <Col>
-                            <button><NavLink to='/edit/account'>Edit Profile</NavLink></button>
+                            <button><NavLink to='/edit/account' style = {{textDecoration : 'none'}}>Edit Profile</NavLink></button>
                         </Col>
 
                     </Row>
