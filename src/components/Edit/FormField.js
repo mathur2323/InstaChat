@@ -1,7 +1,9 @@
 import React from 'react'
 import { Form, Button, ButtonGroup } from 'react-bootstrap';
 
-const FormField = ({ label, type }) => {
+const FormField = (props) => {
+    const { label, type, name, value, handleInput } = props;
+    console.log(props)
     return (
         <Form.Group>
             <Form.Label>{label}</Form.Label>
@@ -9,7 +11,7 @@ const FormField = ({ label, type }) => {
                 label == 'Bio' ?
                     <Form.Control as="textarea" rows="3" />
                     :
-                    <Form.Control type={type} placeholder={label} />
+                    <Form.Control type={type} placeholder={label} name={name} value={value} onChange={handleInput} />
             }
         </Form.Group>
     )

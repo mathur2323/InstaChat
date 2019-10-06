@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter,Redirect, Route, Switch} from 'react-router-dom';
 import Home from './Home/index';
 import NotFound from './NotFound'
 import Register from './Register';
@@ -14,10 +14,9 @@ import { ChangePassword, Contacts, Privacy } from './Edit/Container';
 
 class Router extends Component {
     render() {
-        console.log('routes', this.props.userToken.accessToken)
         return (
             <Switch>
-                <Route path="/" exact component={!!sessionStorage.getItem('access_token') ? Home : Login} />
+                <Route path="/" exact component={!!this.props.userToken.accessToken || !!sessionStorage.getItem('access_token') ? Home : Login} />
                 <Route path="/home" component={Home} />
                 <Route path="/register" component={Register} />
                 <Route path="/profile" component={Profile} />
@@ -26,6 +25,7 @@ class Router extends Component {
                 <Route path="/chat" component={Chat} />
                 <Route path="/notifications" component={Notifications} />
                 <Route path="/unauthaccess" component={UnAuthAccess} />
+                <Redirect to="/" from="/home" />
                 <Route component={NotFound} />
             </Switch>
             

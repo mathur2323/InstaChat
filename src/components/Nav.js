@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { logoutRequest } from './../actions';
 import NavContainer from './wrappers/NavContainer';
-
+import {Redirect} from 'react-router-dom';
 class NavMenu extends Component {
     constructor(props) {
         super(props)
@@ -17,11 +17,17 @@ class NavMenu extends Component {
             accessToken:sessionStorage.getItem('access_token')
         })
     }
+
+    logout= ()=>{
+        this.props.logoutRequest();
+    }
     render() {
+        console.log(this.props.userToken)
         return (
             <>
                 {
-                    !!sessionStorage.getItem('access_token') ? <NavContainer logout={this.props.logoutRequest} /> : window.location.href.indexOf('unauthaccess') >= 0 ? null : <h1 style = {{textDecoration : 'none'}}><img src="https://i0.wp.com/www.somictech.com/wp-content/uploads/2018/02/INSTA-MESSENGER-REVIEW.png?resize=300%2C300&ssl=1" style={styles.image}></img>InstaChat</h1>
+                    !!this.props.userToken.accessToken || 
+                    !!sessionStorage.getItem('access_token') ? <NavContainer logout={this.logout} /> : window.location.href.indexOf('unauthaccess') >= 0 ? null : <h1 style = {{textDecoration : 'none'}}><img src="https://i0.wp.com/www.somictech.com/wp-content/uploads/2018/02/INSTA-MESSENGER-REVIEW.png?resize=300%2C300&ssl=1" style={styles.image}></img>InstaChat</h1>
                 }
             </>
         )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import fire from './config'
+import SuccessSignUp from './wrappers/SuccessSignUp'
 class Register extends Component {
     constructor() {
         super()
@@ -14,7 +15,20 @@ class Register extends Component {
 
     submitData = (e) => {
         e.preventDefault();
+        const {email, password, name, number} = this.state;
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then((userInfo) => {
+                fire.database().ref('users/' + userInfo.user.uid).set({
+                    email,password,name,number
+                });
+                this.setState({
+                    accessToken: userInfo.user.uid
+                })
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
 
@@ -38,22 +52,31 @@ class Register extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
-            <div style={styles.outerdiv}>
-                <h1 style={styles.h1}>Sign Up</h1>
-                <form onSubmit={this.submitData} style={styles.form}>
-                    <input style={styles.inpt} type="text" placeholder="Name" name="name" onChange={this.formVal} value={this.state.name} />
-                    <br /><input style={styles.inpt} type="text" placeholder="Mobile Number" name="number" onChange={this.formVal} value={this.state.number} />
-                    <br /><input style={styles.inpt} type="email" placeholder="Email" name="email" onChange={this.formVal} value={this.state.email} />
-                    <br /><input style={styles.inpt} type="password" placeholder="Password" name="password" onChange={this.formVal} value={this.state.password} />
-                    <br /><button style={styles.btn}>Sign Up</button>
-                </form>
-                <div style={styles.logindiv}>
-                    <p>Already have an account ?</p>
-                    <a href="/"><input style={styles.btn} type="button" value="Log In" /></a>
-                </div>
 
+            <div style={styles.outerdiv}>
+                {
+                    !this.state.accessToken ? (
+                        <>
+                            <h1 style={styles.h1}>Sign Up</h1>
+                            <form onSubmit={this.submitData} style={styles.form}>
+                                <input style={styles.inpt} type="text" placeholder="Name" name="name" onChange={this.formVal} value={this.state.name} />
+                                <br />
+                                <input style={styles.inpt} type="text" placeholder="Mobile Number" name="number" onChange={this.formVal} value={this.state.number} />
+                                <br />
+                                <input style={styles.inpt} type="email" placeholder="Email" name="email" onChange={this.formVal} value={this.state.email} />
+                                <br />
+                                <input style={styles.inpt} type="password" placeholder="Password" name="password" onChange={this.formVal} value={this.state.password} />
+                                <br />
+                                <button style={styles.btn}>Sign Up</button>
+                            </form>
+                            <div style={styles.logindiv}>
+                                <p>Already have an account ?</p>
+                                <a href="/"><input style={styles.btn} type="button" value="Log In" /></a>
+                            </div>
+                        </>
+                    ) : <SuccessSignUp />
+                }
             </div>
 
         )

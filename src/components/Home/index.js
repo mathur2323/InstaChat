@@ -15,7 +15,8 @@ class Home extends Component {
              'https://via.placeholder.com/100',
              'https://via.placeholder.com/100',
              'https://via.placeholder.com/100',
-             'https://via.placeholder.com/100']
+             'https://via.placeholder.com/100'
+            ]
         }
     }
     
