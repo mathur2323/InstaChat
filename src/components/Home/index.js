@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Status from './Status';
 import ConnectionPost from './ConnectionPost';
+import MyPosts from './../MyPosts';
 
 class Home extends Component {
     constructor(props) {
@@ -32,6 +33,7 @@ class Home extends Component {
                 </Row>
                 <Row>
                     <Col>
+                        <MyPosts />
                         <ConnectionPost />
                     </Col>
                 </Row>

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
+import fire from './../config';
+
 class ProfileInfo extends Component {
+    
     render() {
         return (
             <>

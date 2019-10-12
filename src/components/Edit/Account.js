@@ -14,7 +14,8 @@ class Account extends Component {
             website: '',
             bio: '',
             number: '',
-            gender: ''
+            gender: '',
+            disabled:true
         }
     }
 
@@ -30,6 +31,18 @@ class Account extends Component {
         const uid = sessionStorage.getItem("access_token")
         fire.database().ref('users/' + uid).update({
             name,username,website,bio,number,gender
+        });
+    }
+
+    componentDidMount(){
+        const uid = sessionStorage.getItem("access_token");
+        const userDetails = fire.database().ref('users/' + uid);
+        userDetails.on('value', (snapshot) => {
+            const { bio, gender, name, number, username, website } = snapshot.val();
+            this.setState({
+                bio, gender, name, number, username, website 
+            })
+            
         });
     }
 
@@ -75,6 +88,7 @@ class Account extends Component {
                                         name={formField.name}
                                         handleInput={this.handleInput}
                                         value={this.state[formField.name]}
+                                        disabled={this.state.disabled}
                                     />)
                                 }
                                 <FormGroup>

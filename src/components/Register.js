@@ -24,7 +24,6 @@ class Register extends Component {
                 this.setState({
                     accessToken: userInfo.user.uid
                 })
-
             })
             .catch((error) => {
                 console.log(error)

@@ -11,7 +11,13 @@ class PersonalDetails extends react.Component {
         super()
 
         this.state = {
-            profilePictureUrl: ''
+            profilePictureUrl: '',
+            bio: '',
+            gender: '',
+            name: '',
+            number: '',
+            username: '',
+            website: ''
         }
     }
 
@@ -32,6 +38,8 @@ class PersonalDetails extends react.Component {
             console.log('Upload is ' + progress + '% done');
         })
 
+
+
     }
 
 
@@ -50,12 +58,20 @@ class PersonalDetails extends react.Component {
                 })
             });
 
+        const userDetails = fire.database().ref('users/' + uid);
+        userDetails.on('value', (snapshot) => {
+            const { bio, gender, name, number, username, website } = snapshot.val();
+            this.setState({
+                bio, gender, name, number, username, website
+            })
+
+        });
+
     }
 
 
 
     render() {
-        console.log(this.state.profilePictureUrl)
         return (
             <Row>
                 <Col md={3}>
@@ -66,12 +82,12 @@ class PersonalDetails extends react.Component {
                 <Col>
                     <Row>
                         <Col>
-                            <h2>Username</h2>
+                            <h2>{this.state.name}</h2>
                         </Col>
 
 
                         <Col>
-                            <button><NavLink to='/edit/account' style = {{textDecoration : 'none'}}>Edit Profile</NavLink></button>
+                            <button><NavLink to='/edit/account' style={{ textDecoration: 'none' }}>Edit Profile</NavLink></button>
                         </Col>
 
                     </Row>
@@ -88,7 +104,7 @@ class PersonalDetails extends react.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <p>Bio</p>
+                            <p>{this.state.bio}</p>
                         </Col>
                     </Row>
                 </Col>
