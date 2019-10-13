@@ -2,8 +2,9 @@ import {getProfilePicture, getProfilePictureSuccess, getProfilePictureFailure} f
 import {getPosts, getPostsSuccess, getPostsFailure} from './action.posts'
 import {getFriends, getFriendsSuccess, getFriendsFailure} from './action.friends'
 import {loginRequest, loginRequestSuccess, logoutRequest} from './action.loginRequest';
+import {searchResult} from './action.searchResult';
 
-export { getProfilePicture, getProfilePictureSuccess, getProfilePictureFailure,
+export { searchResult, getProfilePicture, getProfilePictureSuccess, getProfilePictureFailure,
     getPosts, getPostsSuccess, getPostsFailure,
     getFriends, getFriendsSuccess, getFriendsFailure,
     loginRequest, loginRequestSuccess, logoutRequest

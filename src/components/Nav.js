@@ -22,12 +22,12 @@ class NavMenu extends Component {
         this.props.logoutRequest();
     }
     render() {
-        console.log(this.props.userToken)
+        console.log(this.props, "Navbar")
         return (
             <>
                 {
                     !!this.props.userToken.accessToken || 
-                    !!sessionStorage.getItem('access_token') ? <NavContainer logout={this.logout} /> : window.location.href.indexOf('unauthaccess') >= 0 ? null : <h1 style = {{textDecoration : 'none'}}><img src="https://i0.wp.com/www.somictech.com/wp-content/uploads/2018/02/INSTA-MESSENGER-REVIEW.png?resize=300%2C300&ssl=1" style={styles.image}></img>InstaChat</h1>
+                    !!sessionStorage.getItem('access_token') ? <NavContainer history={this.props.history} logout={this.logout} /> : window.location.href.indexOf('unauthaccess') >= 0 ? null : <h1 style = {{textDecoration : 'none'}}><img src="https://i0.wp.com/www.somictech.com/wp-content/uploads/2018/02/INSTA-MESSENGER-REVIEW.png?resize=300%2C300&ssl=1" style={styles.image}></img>InstaChat</h1>
                 }
             </>
         )

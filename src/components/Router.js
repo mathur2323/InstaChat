@@ -11,23 +11,28 @@ import Notifications from './Notifications';
 import {connect} from 'react-redux';
 import UnAuthAccess from './wrappers/UnAuthAccess';
 import { ChangePassword, Contacts, Privacy } from './Edit/Container';
+import SearchResultPage from './wrappers/SearchResultPage';
+import Nav from './Nav';
 
 class Router extends Component {
     render() {
         return (
+            <>
             <Switch>
                 <Route path="/" exact component={!!this.props.userToken.accessToken || !!sessionStorage.getItem('access_token') ? Home : Login} />
                 <Route path="/home" component={Home} />
                 <Route path="/register" component={Register} />
-                <Route path="/profile" component={Profile} />
+                <Route path="/profile/:uid" component={Profile} />
                 <Route path="/edit/" component={EditProfile} />
                 <Route path="/edit/account" component={EditProfile} />
                 <Route path="/chat" component={Chat} />
                 <Route path="/notifications" component={Notifications} />
                 <Route path="/unauthaccess" component={UnAuthAccess} />
+                <Route path="/results" component={SearchResultPage} />
                 <Redirect to="/" from="/home" />
                 <Route component={NotFound} />
             </Switch>
+            </>
             
         )
     }

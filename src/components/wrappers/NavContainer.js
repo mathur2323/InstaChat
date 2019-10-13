@@ -7,11 +7,27 @@ import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faPaperPlane, faUser } from '@fortawesome/free-solid-svg-icons'
+import fire from './../config';
+import {connect} from 'react-redux';
+import {searchResult} from './../../actions';
 
 class NavContainer extends Component {
+    constructor() {
+        super()
+    
+        this.state = {
+             searchValue:''
+        }
+    }
+    
+    handleInput = e => {
+        this.setState({
+            searchValue:e.target.value
+        })
+    }
+
     render() {
         return (
-
             <Navbar bg="light" expand="lg">
                 <Navbar.Brand>
                     <NavLink to="/"><img src="https://i0.wp.com/www.somictech.com/wp-content/uploads/2018/02/INSTA-MESSENGER-REVIEW.png?resize=300%2C300&ssl=1" style={styles.image} /></NavLink>
@@ -20,13 +36,13 @@ class NavContainer extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Form inline style={styles.searchBar}>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
+                        <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleInput} />
+                        <NavLink to={`/results?${this.state.searchValue}`}>Search</NavLink>
                     </Form>
                     <Nav className="ml-auto">
                         <NavLink className="mx-2" to="/chat"><FontAwesomeIcon icon={faPaperPlane} style={styles.iconStyle} /></NavLink>
                         <NavLink className="mx-2" to="/notifications"><FontAwesomeIcon icon={faHeart} style={styles.iconStyle} /></NavLink>
-                        <NavLink className="mx-2" to="/profile">
+                        <NavLink className="mx-2" to={`/profile/:${sessionStorage.getItem("access_token")}`}>
                             <FontAwesomeIcon icon={faUser} style={styles.iconStyle} />
                         </NavLink>
                         <p onClick={this.props.logout}>Logout</p>
@@ -54,4 +70,9 @@ const styles = {
         margin : '0px 5px'
     }
 }
-export default NavContainer
+
+const mapDispatchToProps = dispatch => ({
+    searchResult:()=>dispatch(searchResult())
+})
+
+export default connect(null, mapDispatchToProps)(NavContainer)
